@@ -1,0 +1,13 @@
+.diseases {
+    display: flex;
+    width: 80%;
+    margin: 30px auto;
+
+  }
+
+  .list{
+    padding: 2em;
+    border-color: #fff;
+    border: medium dashed green;
+  }
+  
