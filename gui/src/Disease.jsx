@@ -1,31 +1,47 @@
-import React from "react";
-import Navbar from "./Navbar.jsx";
+import React, { useEffect, useState } from "react";
 import "./Disease.css";
 import diseaseList from "./data/diseaseList.json";
 
 function Disease() {
-    const list = diseaseList.diseaseList;
+    const [imageImports, setImageImports] = useState({});
+
+    useEffect(() => {
+        const importImages = async () => {
+            const imports = {};
+            await Promise.all(
+                diseaseList.diseaseList.map(async (item) => {
+                    try {
+                        const module = await import(
+                            `./data/${item.image_path}`
+                        );
+                        imports[item.image_path] = module.default;
+                    } catch (error) {
+                        console.error(
+                            `Failed to import image: ${item.image_path}`,
+                            error
+                        );
+                    }
+                })
+            );
+            setImageImports(imports);
+        };
+
+        importImages();
+    }, []);
 
     return (
         <div className="container">
-            <Navbar />
             <h1>Disease GUI</h1>
             <div className="diseases">
-                {list.map((item) => (
-                    <div className="list" key={item.plant_id}>
-                        <p className="plant_id">Plant #{item.plant_id}</p>
+                {diseaseList.diseaseList.map((item, index) => (
+                    <div key={index}>
                         <img
-                            src={
-                                require(`gui/src/data/${item.image_path.slice(
-                                    2
-                                )}`).default
-                            }
-                            alt={item.prediction}
+                            style={{ width: "90%" }}
+                            src={imageImports[item.image_path]}
+                            alt={`Plant #${item.plant_id}`}
                         />
-                        <h2 className="prediction">{item.prediction}</h2>
-                        {/* <p className="logits">{item.logits}</p> */}
-                        <p className="content">{item.content}</p>
-                        {console.log(`.src/data/${item.image_path.slice(2)}`)}
+                        <p>Prediction: {item.prediction}</p>
+                        <p>Content: {item.content}</p>
                     </div>
                 ))}
             </div>
