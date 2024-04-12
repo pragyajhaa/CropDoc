@@ -1,7 +1,7 @@
 import './App.css'
 import Navbar from './Navbar.jsx'
 import { Line } from "react-chartjs-2";
-import data from './data/moisture.json';
+import data from './data/serialtest.json';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from "chart.js";
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 

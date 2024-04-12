@@ -11,7 +11,7 @@ while True:
 	if ser.in_waiting:
 		packet = ser.readline()
 		val = packet.decode('latin-1').rstrip('\n')
-		#print(val)
+		print(val)
 		data[str(time)] = val.rstrip('\r')
 		f = open("serialtest.json", "w")
 		json.dump(data, f)
