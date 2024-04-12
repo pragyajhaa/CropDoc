@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Disease.css";
 import diseaseList from "./data/diseaseList.json";
+import Navbar from './Navbar.jsx'
 
 function Disease() {
     const [imageImports, setImageImports] = useState({});
@@ -31,10 +32,11 @@ function Disease() {
 
     return (
         <div className="container">
+            <Navbar/>
             <h1>Disease GUI</h1>
             <div className="diseases">
                 {diseaseList.diseaseList.map((item, index) => (
-                    <div key={index}>
+                    <div className = 'list' key={index}>
                         <img
                             style={{ width: "90%" }}
                             src={imageImports[item.image_path]}
