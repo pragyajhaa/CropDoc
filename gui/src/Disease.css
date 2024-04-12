@@ -1,13 +1,14 @@
 .diseases {
-    display: flex;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: repeat(6, 1fr);
     width: 80%;
     margin: 30px auto;
+}
 
-  }
-
-  .list{
+.list {
     padding: 2em;
     border-color: #fff;
     border: medium dashed green;
-  }
-  
+}
